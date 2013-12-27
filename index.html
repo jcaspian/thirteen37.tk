@@ -47,7 +47,7 @@
         height: auto!important;
       }
       .bb-bookblock {
-        margin: 0 10px;
+        margin: 0 5px;
         -webkit-transform: translate3d(0, 0, 0);
         -webkit-backface-visibility: hidden;
         -webkit-perspective: 1000;
@@ -167,7 +167,7 @@
         top: 0;
         bottom: 0;
         background: #f1f1f1;
-        padding: 20px;
+        padding: 0 20px 20px 20px;
         font-size: 15px;
         transition: all .4s ease-in-out;
         z-index: 2;
@@ -178,25 +178,25 @@
         -webkit-backface-visibility: hidden;
         -webkit-perspective: 1000;
       }
-      .bb-item-content:before {
-        content: '';
-        display: block;
-        width: 0;
-        height: 0;
-        position: relative;
+      .bb-item-content-bar {
+        border-bottom: 2px solid #ccc;
+      }
+      .bb-item-content-bar-back-arrow {
+        display: inline-block;
+        vertical-align: middle;
         border-top: transparent solid 10px;
         border-bottom: transparent solid 10px;
         border-right: #333 solid 10px;
       }
-      .bb-item-content:after {
-        content: 'Back';
-        position: absolute;
-        top: 17px;
-        left: 33px;
+      .bb-item-content-bar-back {
         color: #333;
         font-weight: bold;
         font-size: 20px;
-        visibility: hidden;
+        display: inline-block;
+        padding: 20px 0;
+      }
+      .bb-item-content-bar-back span {
+        vertical-align: middle;
       }
       .bb-item-content-show {
         left: 0%;
@@ -225,6 +225,14 @@
               </div>
             </div>
             <div class="bb-item-content">
+              <div class="bb-item-content-bar">
+                <div class="bb-item-content-bar-back">
+                  <div class="bb-item-content-bar-back-arrow"></div>
+                  <span>
+                    Back
+                  </span>
+                </div>
+              </div>
               <h1>
                 Internet Archive starts preserving classic game consoles on the web
               </h1>
@@ -249,6 +257,14 @@
               </div>
             </div>
             <div class="bb-item-content">
+              <div class="bb-item-content-bar">
+                <div class="bb-item-content-bar-back">
+                  <div class="bb-item-content-bar-back-arrow"></div>
+                  <span>
+                    Back
+                  </span>
+                </div>
+              </div>
               <h1>
                 iFixit tears apart a Magnavox Odyssey 100, doesn't find a disco ball inside
               </h1>
@@ -302,6 +318,13 @@
                   }
                   return false;
                 }
+              });
+              $bookBlock.find('.bb-item-content-bar-back').click(function () {
+                if ($bookBlock.find('.bb-item-content-show').length) {
+                  $bookBlock.find('.bb-item-content-show').removeClass('bb-item-content-show');
+                  $bookBlock.find('.bb-item-headline').removeClass('bb-item-headline-fade');
+                }
+                return false;
               });
             });
             $grid.focus();
