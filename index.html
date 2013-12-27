@@ -279,7 +279,7 @@
                   $bookBlock.bookblock('prev');
                   return false;
                 },
-                'click touchstart': function (ev) {
+                'click': function (ev) {
                   console.log('click');
                   $bookBlock.find('.bb-item-content').addClass('bb-item-content-show');
                   $bookBlock.find('.bb-item-headline').addClass('bb-item-headline-fade');
