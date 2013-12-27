@@ -28,7 +28,13 @@
         right: 0;
         bottom: 0;
         left: 0;
-        overflow: hidden;
+      }
+      html,
+      body,
+      .container,
+      .bb-custom-grid,
+      .bb-bookblock {
+        overflow: hidden!important;
       }
       h1 {
         color: #333;
@@ -50,6 +56,8 @@
         margin: 0 7px;
         -webkit-transform: translate3d(0, 0, 0);
         -webkit-backface-visibility: hidden;
+        -moz-backface-visibility:    hidden;
+        -ms-backface-visibility:     hidden;
         -webkit-perspective: 1000;
       }
       .bb-item {
