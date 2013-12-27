@@ -200,12 +200,12 @@ var swipe = $.event.swipe = {
 	 * 
 	 * A user must perform the swipe motion in this much time.
 	 */
-	delay : 1000,
+	delay : 5000,
 	/**
 	 * @attribute max
 	 * The maximum distance the pointer must travel in pixels.  The default is 75 pixels.
 	 */
-	max : 200,
+	max : 1920,
 	/**
 	 * @attribute min
 	 * The minimum distance the pointer must travel in pixels.  The default is 30 pixels.
