@@ -53,7 +53,7 @@
       }
       .bb-bookblock {
         margin: 0 7px;
-        -webkit-transform: translate3d(0, 0, 0);
+        -webkit-transform: translateZ(0);
         -webkit-backface-visibility: hidden;
         -moz-backface-visibility:    hidden;
         -ms-backface-visibility:     hidden;
@@ -103,6 +103,7 @@
         -ms-transform: scale(0.8);
         transform: scale(0.8);
         opacity: 0;
+        -webkit-transform: translateZ(0);
       }
       .bb-item-headline h1 {
         color: #333;
@@ -114,7 +115,13 @@
         max-height: 72px;
       }
       .bb-item-headline img {
-        width: 100%;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        zoom: 8;
+        margin: auto;
+        display: block;
         z-index: 1;
       }
       .bb-item-headline-p1:before {
@@ -147,6 +154,7 @@
         right: 0;
         bottom: 50%;
         overflow: hidden;
+        display: flex;
       }
       
       .bb-item-headline-p2 {
@@ -184,9 +192,7 @@
         visibility: hidden;
         overflow: hidden;
         overflow-y: auto;
-        -webkit-transform: translate3d(0, 0, 0);
-        -webkit-backface-visibility: hidden;
-        -webkit-perspective: 1000;
+        -webkit-transform: translateZ(0);
       }
       .bb-item-content-bar {
         border-bottom: 2px solid #ccc;
@@ -211,9 +217,7 @@
       .bb-item-content-show {
         left: 0%;
         visibility: visible;
-        -webkit-transform: translate3d(0, 0, 0);
-        -webkit-backface-visibility: hidden;
-        -webkit-perspective: 1000;
+        -webkit-transform: translateZ(0);
       }
     </style>
 	</head>
@@ -224,7 +228,11 @@
 				<div class="bb-bookblock">
 					<div class="bb-item">
             <div class="bb-item-headline bb-item-headline">
+              <!--
               <div class="bb-item-headline-p1" style="background-image: url(images/xevious-console-living-room.jpg)">
+              -->
+              <div class="bb-item-headline-p1">
+                <img src="images/xevious-console-living-room.jpg" alt="" />
               </div>
               <div class="bb-item-headline-p2">
                 <h1 class="ellipsis">
@@ -255,7 +263,11 @@
           </div>
           <div class="bb-item">
             <div class="bb-item-headline">
+              <!--
               <div class="bb-item-headline-p1" style="background-image: url(images/a6jfqxcpvkmybknx.jpg)">
+              -->
+              <div class="bb-item-headline-p1">
+                <img src="images/a6jfqxcpvkmybknx.jpg" alt="" />
               </div>
               <div class="bb-item-headline-p2">
                 <h1 class="ellipsis">
