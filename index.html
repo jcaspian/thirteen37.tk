@@ -36,14 +36,18 @@
       p {
         color: #555;
       }
+      .container,
       .bb-bookblock {
         position: absolute;
-        left: 10px;
-        right: 10px;
+        left: 0;
+        right: 0;
         top: 0;
         bottom: 0;
         width: auto!important;
         height: auto!important;
+      }
+      .bb-bookblock {
+        margin: 0 10px;
       }
       .bb-item {
         background: transparent!important;
@@ -275,17 +279,16 @@
                 return false;
               });
               $bookBlock.find('.bb-item-headline').swipe({
-                swipeUp: function () {
-                  $bookBlock.bookblock('next');
-                  return false;
-                },
-                swipeDown: function () {
-                  $bookBlock.bookblock('prev');
+                swipe: function (event, direction, distance, duration, fingerCount) {
+                  if (direction == 'up')
+                    $bookBlock.bookblock('next');
+                  else if (direction == 'down')
+                    $bookBlock.bookblock('prev');
                   return false;
                 }
               });
               $bookBlock.find('.bb-item-content').swipe({
-                swipeRight: function (ev) {
+                swipeRight: function (event, direction, distance, duration, fingerCount) {
                   if ($bookBlock.find('.bb-item-content-show').length) {
                     $bookBlock.find('.bb-item-content-show').removeClass('bb-item-content-show');
                     $bookBlock.find('.bb-item-headline').removeClass('bb-item-headline-fade');
