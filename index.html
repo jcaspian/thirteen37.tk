@@ -36,6 +36,15 @@
       p {
         color: #555;
       }
+      .bb-bookblock {
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        top: 0;
+        bottom: 0;
+        width: auto!important;
+        height: auto!important;
+      }
       .bb-item {
         background: transparent!important;
       }
@@ -240,7 +249,8 @@
 			</div>
 		</div><!-- /container -->
 		<script src="js/jquery-1.10.2.min.js"></script>
-		<script src="js/jquerypp.custom.js"></script>
+		<!-- <script src="js/jquerypp.custom.js"></script> -->
+    <script src="js/jquery.touchSwipe.min.js"></script>
 		<script src="js/jquery.bookblock.js"></script>
 		<script>
 			var Page = (function() {
@@ -249,120 +259,41 @@
         
         return {
           init : function() {
-            /*
-						config.$bookBlock.bookblock( {
-							orientation : 'horizontal',
-							speed : 500,
-							shadowSides : 0.8,
-							shadowFlip : 0.4
-						} );
-						this.initEvents();
-            */
             $grid.find('div.bb-bookblock').each( function (i) {
               
               var $bookBlock = $(this),
-                  $nav = $bookBlock.next().children('span'),
                   bb = $bookBlock.bookblock({
                     orientation: 'horizontal',
                     speed: 600,
                     shadowSides: 0.8,
                     shadowFlip: 0.4
                   });
-              $nav.each(function () {
-                $(this).on('click touchstart', function (ev) {
-                  var $dot = $(this);
-                  $nav.removeClass('bb-current');
-                  $dot.addClass('bb-current');
-                  $bookBlock.bookblock('jump', i+1);
-                  return false;
-                });
+              $bookBlock.find('.bb-item-headline').click(function (ev) {
+                $bookBlock.find('.bb-item-content').addClass('bb-item-content-show');
+                $bookBlock.find('.bb-item-headline').addClass('bb-item-headline-fade');
+                return false;
               });
-              $bookBlock.find('.bb-item-headline').on({
-                'swipeup': function (ev) {
+              $bookBlock.find('.bb-item-headline').swipe({
+                swipeUp: function () {
                   $bookBlock.bookblock('next');
                   return false;
                 },
-                'swipedown': function (ev) {
+                swipeDown: function () {
                   $bookBlock.bookblock('prev');
                   return false;
-                },
-                'click': function (ev) {
-                  console.log('click');
-                  $bookBlock.find('.bb-item-content').addClass('bb-item-content-show');
-                  $bookBlock.find('.bb-item-headline').addClass('bb-item-headline-fade');
                 }
               });
-              $bookBlock.find('.bb-item-content').on({
-                'swiperight': function (ev) {
-                  console.log('swiperight');
-                  console.log(this);
+              $bookBlock.find('.bb-item-content').swipe({
+                swipeRight: function (ev) {
                   if ($bookBlock.find('.bb-item-content-show').length) {
                     $bookBlock.find('.bb-item-content-show').removeClass('bb-item-content-show');
                     $bookBlock.find('.bb-item-headline').removeClass('bb-item-headline-fade');
                   }
+                  return false;
                 }
               });
             });
-					},
-					initEvents : function() {
-						
-						//var $slides = config.$bookBlock.children();
-            var $slides = config.$item;
-
-						// add navigation events
-						config.$navNext.on( 'click touchstart', function() {
-							config.$bookBlock.bookblock( 'next' );
-							return false;
-						} );
-
-						config.$navPrev.on( 'click touchstart', function() {
-							config.$bookBlock.bookblock( 'prev' );
-							return false;
-						} );
-
-						config.$navFirst.on( 'click touchstart', function() {
-							config.$bookBlock.bookblock( 'first' );
-							return false;
-						} );
-
-						config.$navLast.on( 'click touchstart', function() {
-							config.$bookBlock.bookblock( 'last' );
-							return false;
-						} );
-						
-						// add swipe events
-						$slides.on( {
-							'swipeup' : function( event ) {
-								config.$bookBlock.bookblock( 'next' );
-								return false;
-							},
-							'swipedown' : function( event ) {
-								config.$bookBlock.bookblock( 'prev' );
-								return false;
-							}
-						} );
-
-						// add keyboard events
-						$( document ).keydown( function(e) {
-							var keyCode = e.keyCode || e.which,
-								arrow = {
-									left : 37,
-									up : 38,
-									right : 39,
-									down : 40
-								};
-
-							switch (keyCode) {
-								case arrow.left:
-                case arrow.up:
-									config.$bookBlock.bookblock( 'prev' );
-									break;
-								case arrow.right:
-                case arrow.down:
-									config.$bookBlock.bookblock( 'next' );
-									break;
-							}
-						});
+            $grid.focus();
 					}
         };
 			})();
