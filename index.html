@@ -1,9 +1,367 @@
 <!DOCTYPE html>
-<head>
-	<title>thirteen37.tk</title>
-</head>
-<body>
-	<h1>
-		thirteen37.tk
-	</h1>
-</body>
+<html lang="en" class="no-js demo-4">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>BookBlock: A Content Flip Plugin - Demo 4</title>
+		<meta name="description" content="Bookblock: A Content Flip Plugin - Demo 4" />
+		<meta name="keywords" content="javascript, jquery, plugin, css3, flip, page, 3d, booklet, book, perspective" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico"> 
+		<link rel="stylesheet" type="text/css" href="css/default.css" />
+		<link rel="stylesheet" type="text/css" href="css/bookblock.css" />
+		<!-- custom demo style -->
+		<link rel="stylesheet" type="text/css" href="css/demo4.css" />
+		<script src="js/modernizr.custom.js"></script>
+    <style>
+      body {
+        background: #000!important;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      h1 {
+        color: #333;
+      }
+      p {
+        color: #555;
+      }
+      .bb-item {
+        background: transparent!important;
+      }
+      .ellipsis:before {
+        content: '\2026';
+        position: absolute;
+        bottom: 0;
+        padding: 0 .1em 0 0;
+        right: 0;
+        background: #f1f1f1;
+        box-shadow: #f1f1f1 -.2em .4em .4em .1em;
+        z-index: 1;
+      }
+      .ellipsis:after {
+        content: '\2026';
+        color: #f1f1f1;
+        display: inline;
+        position: relative;
+        float: right;
+        padding: 0 .6em 0 .1em;
+        background: #f1f1f1;
+        height: 1em;
+        bottom: 0;
+        right: 0;
+        z-index: 2;
+      }
+      .bb-item-headline {
+        position: absolute;
+        height: 100%;
+        overflow: hidden!important;
+        z-index: 1;
+        transition: all .3s ease-in-out;
+        zoom: 1;
+        opacity: 1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      .bb-item-headline-fade {
+        -webkit-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      .bb-item-headline h1 {
+        color: #333;
+        font-size: 40px;
+        margin: 0;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        height: 96px;
+      }
+      .bb-item-headline img {
+        width: 100%;
+        z-index: 1;
+      }
+      .bb-item-headline-p1:before {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        content: '';
+        display: block;
+      }
+      
+      .bb-item-headline p {
+        margin: 0;
+        color: #555;
+        font-size: 20px;
+        overflow: hidden;
+        position: relative;
+        margin: 10px 0;
+      }
+      
+      .bb-item-headline-p1 {
+        background: #f1f1f1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 50%;
+        overflow: hidden;
+      }
+      
+      .bb-item-headline-p2 {
+        background: #f1f1f1;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        padding: 20px;
+      }
+      .bb-item-headline a,
+      .bb-item-headline a:hover {
+        font-weight: bold!important;
+        color: #00b7ff;
+        opacity: 1;
+        display: block;
+        padding: 10px 0;
+        font-size: 15px;
+      }
+      .bb-item-content {
+        display: block;
+        width: 100%;
+        left: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background: #f1f1f1;
+        padding: 20px;
+        font-size: 20px;
+        transition: all .4s ease-in-out;
+        z-index: 2;
+        visibility: hidden;
+        overflow: hidden;
+        overflow-y: auto;
+      }
+      .bb-item-content:before {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        position: relative;
+        border-top: transparent solid 25px;
+        border-bottom: transparent solid 25px;
+        border-right: #333 solid 25px;
+      }
+      .bb-item-content:after {
+        content: 'Back';
+        position: absolute;
+        top: 8px;
+        left: 50px;
+        color: #333;
+        font-size: 60px;
+      }
+      .bb-item-content-show {
+        left: 0%;
+        visibility: visible;
+      }
+    </style>
+	</head>
+	<body>
+		<div class="container">
+			<div id="bb-custom-grid" class="bb-custom-wrapper">
+				
+				<div class="bb-bookblock">
+					<div class="bb-item">
+            <div class="bb-item-headline bb-item-headline">
+              <div class="bb-item-headline-p1">
+                <img src="images/xevious-console-living-room.jpg" />
+              </div>
+              <div class="bb-item-headline-p2">
+                <h1 class="ellipsis">
+                  Internet Archive starts preserving classic game consoles on the web
+                </h1>
+                <p class="ellipsis">
+                  Many gamers won't load a console emulator for much more than a brief nostalgia kick. The Internet Archive has loftier goals, however. 
+                </p>
+                <a>Read More</a>
+              </div>
+            </div>
+            <div class="bb-item-content">
+              <h1>
+                Internet Archive starts preserving classic game consoles on the web
+              </h1>
+              <p>
+                Many gamers won't load a console emulator for much more than a brief nostalgia kick. The Internet Archive has loftier goals, however. It's expanding its Historical Software Collection to include the free-to-play Console Living Room beta, which recreates classic '70s and '80s systems on the web for the sake of the historical record. The initial library includes hundreds of games for the Astrocade, Atari 2600, Atari 7800, ColecoVision and Magnavox Odyssey. There are gaps in the catalog, and sound isn't working; the CLR isn't yet a match for a conventional software emulator, let alone the real thing. The Internet Archive promises to address both problems in the near future, though, and it shouldn't be long before its collection delivers a complete vintage gaming experience... minus the old-fashioned tube TV.
+              </p>
+            </div>
+          </div>
+          <div class="bb-item">
+            <div class="bb-item-headline">
+              <div class="bb-item-headline-p1">
+                <img src="images/a6jfqxcpvkmybknx.jpg" />
+              </div>
+              <div class="bb-item-headline-p2">
+                <h1 class="ellipsis">
+                  iFixit tears apart a Magnavox Odyssey 100, doesn't find a disco ball inside
+                </h1>
+                <p class="ellipsis">
+                  The fine people at iFixit have taken the extremely awesome step of tearing down some very retro gear this week, and up first, they've got the Magnavox Odyssey 100 which dates from 1975.
+                </p>
+                <a>Read More</a>
+              </div>
+            </div>
+            <div class="bb-item-content">
+              <h1>
+                iFixit tears apart a Magnavox Odyssey 100, doesn't find a disco ball inside
+              </h1>
+              <p>
+                The fine people at iFixit have taken the extremely awesome step of tearing down some very retro gear this week, and up first, they've got the Magnavox Odyssey 100 which dates from 1975. The gaming console, which boasted two (count them ) games -- Tennis and Hockey -- was built around four Texas Instruments chips and powered by six C batteries. It was also the first home gaming console, so we were pretty interested in seeing its insides. What struck us in looking at the photos was the most obvious thing: how much emptier it is than modern gadgets. It was also completely dismantled in just seven steps. Hit the source for more photos and keep your eye out for more vintage disassemblies as the week progresses.
+              </p>
+            </div>
+          </div>
+				</div>
+			</div>
+		</div><!-- /container -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquerypp.custom.js"></script>
+		<script src="js/jquery.bookblock.js"></script>
+		<script>
+			var Page = (function() {
+
+        var $grid = $( '#bb-custom-grid' );
+        
+        return {
+          init : function() {
+            /*
+						config.$bookBlock.bookblock( {
+							orientation : 'horizontal',
+							speed : 500,
+							shadowSides : 0.8,
+							shadowFlip : 0.4
+						} );
+						this.initEvents();
+            */
+            $grid.find('div.bb-bookblock').each( function (i) {
+              
+              var $bookBlock = $(this),
+                  $nav = $bookBlock.next().children('span'),
+                  bb = $bookBlock.bookblock({
+                    orientation: 'horizontal',
+                    speed: 600,
+                    shadowSides: 0.8,
+                    shadowFlip: 0.4
+                  });
+              $nav.each(function () {
+                $(this).on('click touchstart', function (ev) {
+                  var $dot = $(this);
+                  $nav.removeClass('bb-current');
+                  $dot.addClass('bb-current');
+                  $bookBlock.bookblock('jump', i+1);
+                  return false;
+                });
+              });
+              $bookBlock.find('.bb-item-headline').on({
+                'swipeup': function (ev) {
+                  $bookBlock.bookblock('next');
+                  return false;
+                },
+                'swipedown': function (ev) {
+                  $bookBlock.bookblock('prev');
+                  return false;
+                },
+                'click touchstart': function (ev) {
+                  console.log('click');
+                  $bookBlock.find('.bb-item-content').addClass('bb-item-content-show');
+                  $bookBlock.find('.bb-item-headline').addClass('bb-item-headline-fade');
+                }
+              });
+              $bookBlock.find('.bb-item-content').on({
+                'swiperight': function (ev) {
+                  console.log('swiperight');
+                  console.log(this);
+                  if ($bookBlock.find('.bb-item-content-show').length) {
+                    $bookBlock.find('.bb-item-content-show').removeClass('bb-item-content-show');
+                    $bookBlock.find('.bb-item-headline').removeClass('bb-item-headline-fade');
+                  }
+                }
+              });
+            });
+					},
+					initEvents : function() {
+						
+						//var $slides = config.$bookBlock.children();
+            var $slides = config.$item;
+
+						// add navigation events
+						config.$navNext.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'next' );
+							return false;
+						} );
+
+						config.$navPrev.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'prev' );
+							return false;
+						} );
+
+						config.$navFirst.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'first' );
+							return false;
+						} );
+
+						config.$navLast.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'last' );
+							return false;
+						} );
+						
+						// add swipe events
+						$slides.on( {
+							'swipeup' : function( event ) {
+								config.$bookBlock.bookblock( 'next' );
+								return false;
+							},
+							'swipedown' : function( event ) {
+								config.$bookBlock.bookblock( 'prev' );
+								return false;
+							}
+						} );
+
+						// add keyboard events
+						$( document ).keydown( function(e) {
+							var keyCode = e.keyCode || e.which,
+								arrow = {
+									left : 37,
+									up : 38,
+									right : 39,
+									down : 40
+								};
+
+							switch (keyCode) {
+								case arrow.left:
+                case arrow.up:
+									config.$bookBlock.bookblock( 'prev' );
+									break;
+								case arrow.right:
+                case arrow.down:
+									config.$bookBlock.bookblock( 'next' );
+									break;
+							}
+						});
+					}
+        };
+			})();
+		</script>
+		<script>
+				Page.init();
+		</script>
+	</body>
+</html>
