@@ -1,0 +1,57 @@
+html,
+body,
+.container {
+  font-family: Helvetica, Helvetica Neue, Arial;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+
+.header {
+  background: #f00;
+  height: 50px;
+}
+
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li {
+  vertical-align: top;
+}
+
+.nav > ul > li {
+  display: inline-block;
+}
+
+.nav > ul > li > ul {
+}
+
+.nav .category-name {
+  font-weight: bold;
+  font-size: 125%;
+}
+
+.nav .type-name {
+  font-weight: bold;
+  font-size: 110%;
+}
+
+.nav-hidden {
+  display: none;
+}
+
+.content {
+  background: #0f0;
+}
+
+.footer {
+  background: #00f;
+}

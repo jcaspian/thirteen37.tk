@@ -1,363 +1,237 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js demo-4">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no,target-densitydpi=medium-dpi" />
-		<title>BookBlock: A Content Flip Plugin - Demo 4</title>
-		<meta name="description" content="Bookblock: A Content Flip Plugin - Demo 4" />
-		<meta name="keywords" content="javascript, jquery, plugin, css3, flip, page, 3d, booklet, book, perspective" />
-		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico"> 
-		<link rel="stylesheet" type="text/css" href="css/default.css" />
-		<link rel="stylesheet" type="text/css" href="css/bookblock.css" />
-		<!-- custom demo style -->
-		<link rel="stylesheet" type="text/css" href="css/demo4.css" />
-		<script src="js/modernizr.custom.js"></script>
-    <style>
-      body {
-        background: #000!important;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-      }
-      html,
-      body,
-      .container,
-      .bb-custom-grid {
-        overflow: hidden!important;
-      }
-      h1 {
-        color: #333;
-      }
-      p {
-        color: #555;
-      }
-      .container,
-      .bb-bookblock {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: auto!important;
-        height: auto!important;
-      }
-      .bb-bookblock {
-        margin: 0 7px;
-        -webkit-transform: translateZ(0);
-        -webkit-backface-visibility: hidden;
-        -moz-backface-visibility:    hidden;
-        -ms-backface-visibility:     hidden;
-        -webkit-perspective: 1000;
-      }
-      .bb-item {
-        background: transparent!important;
-      }
-      .ellipsis:before {
-        content: '\2026';
-        position: absolute;
-        bottom: 0;
-        padding: 0 .1em 0 0;
-        right: 0;
-        background: #f1f1f1;
-        box-shadow: #f1f1f1 -.2em .4em .4em .1em;
-        z-index: 1;
-      }
-      .ellipsis:after {
-        content: '\2026';
-        color: #f1f1f1;
-        display: inline;
-        position: relative;
-        float: right;
-        padding: 0 .6em 0 .1em;
-        background: #f1f1f1;
-        height: 1em;
-        bottom: 0;
-        right: 0;
-        z-index: 2;
-      }
-      .bb-item-headline {
-        position: absolute;
-        height: 100%;
-        overflow: hidden!important;
-        z-index: 1;
-        transition: all .6s ease-in-out;
-        zoom: 1;
-        opacity: 1;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-      }
-      .bb-item-headline-fade {
-        -webkit-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-        transform: scale(0.8);
-        opacity: 0;
-        -webkit-transform: translateZ(0);
-      }
-      .bb-item-headline h1 {
-        color: #333;
-        font-size: 30px;
-        margin: 0;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-        max-height: 72px;
-      }
-      .bb-item-headline img {
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        max-height: 100%;
-        zoom: 8;
-        margin: auto;
-        display: block;
-        z-index: 1;
-        position: relative;
-      }
-      .bb-item-headline-p1:before {
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        position: absolute;
-        content: '';
-        display: block;
-      }
-      
-      .bb-item-headline p {
-        margin: 0;
-        color: #555;
-        font-size: 15px;
-        overflow: hidden;
-        position: relative;
-        margin: 10px 0;
-      }
-      
-      .bb-item-headline-p1 {
-        background-color: #f1f1f1;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 50%;
-        overflow: hidden;
-        display: flex;
-      }
-      
-      .bb-item-headline-p2 {
-        background: #f1f1f1;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        overflow: hidden;
-        padding: 15px;
-      }
-      .bb-item-headline a,
-      .bb-item-headline a:hover {
-        font-weight: bold!important;
-        color: #00b7ff;
-        opacity: 1;
-        display: inline-block;
-        padding: 10px 0;
-        font-size: 15px;
-      }
-      .bb-item-content {
-        display: block;
-        width: 100%;
-        height: 100%;
-        left: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        background: #f1f1f1;
-        padding: 0 20px 20px 20px;
-        font-size: 15px;
-        transition: all .4s ease-in-out;
-        z-index: 2;
-        visibility: hidden;
-        overflow: hidden;
-        overflow-y: auto;
-        -webkit-transform: translateZ(0);
-      }
-      .bb-item-content-bar {
-        border-bottom: 2px solid #ccc;
-      }
-      .bb-item-content-bar-back-arrow {
-        display: inline-block;
-        vertical-align: middle;
-        border-top: transparent solid 10px;
-        border-bottom: transparent solid 10px;
-        border-right: #333 solid 10px;
-      }
-      .bb-item-content-bar-back {
-        color: #333;
-        font-weight: bold;
-        font-size: 20px;
-        display: inline-block;
-        padding: 20px 0;
-      }
-      .bb-item-content-bar-back a {
-        vertical-align: middle;
-      }
-      .bb-item-content-show {
-        left: 0%;
-        visibility: visible;
-        -webkit-transform: translateZ(0);
-      }
-    </style>
-	</head>
-	<body>
-		<div class="container">
-			<div id="bb-custom-grid" class="bb-custom-wrapper">
-				
-				<div class="bb-bookblock">
-					<div class="bb-item">
-            <div class="bb-item-headline bb-item-headline">
-              <!--
-              <div class="bb-item-headline-p1" style="background-image: url(images/xevious-console-living-room.jpg)">
-              -->
-              <div class="bb-item-headline-p1">
-                <img src="images/xevious-console-living-room.jpg" alt="" />
-              </div>
-              <div class="bb-item-headline-p2">
-                <h1 class="ellipsis">
-                  Internet Archive starts preserving classic game consoles on the web
-                </h1>
-                <p class="ellipsis">
-                  Many gamers won't load a console emulator for much more than a brief nostalgia kick. The Internet Archive has loftier goals, however. 
-                </p>
-                <a>Read More</a>
-              </div>
-            </div>
-            <div class="bb-item-content">
-              <div class="bb-item-content-bar">
-                <div class="bb-item-content-bar-back">
-                  <div class="bb-item-content-bar-back-arrow"></div>
-                  <a>
-                    Back
-                  </a>
-                </div>
-              </div>
-              <h1>
-                Internet Archive starts preserving classic game consoles on the web
-              </h1>
-              <p>
-                Many gamers won't load a console emulator for much more than a brief nostalgia kick. The Internet Archive has loftier goals, however. It's expanding its Historical Software Collection to include the free-to-play Console Living Room beta, which recreates classic '70s and '80s systems on the web for the sake of the historical record. The initial library includes hundreds of games for the Astrocade, Atari 2600, Atari 7800, ColecoVision and Magnavox Odyssey. There are gaps in the catalog, and sound isn't working; the CLR isn't yet a match for a conventional software emulator, let alone the real thing. The Internet Archive promises to address both problems in the near future, though, and it shouldn't be long before its collection delivers a complete vintage gaming experience... minus the old-fashioned tube TV.
-              </p>
-            </div>
-          </div>
-          <div class="bb-item">
-            <div class="bb-item-headline">
-              <!--
-              <div class="bb-item-headline-p1" style="background-image: url(images/a6jfqxcpvkmybknx.jpg)">
-              -->
-              <div class="bb-item-headline-p1">
-                <img src="images/a6jfqxcpvkmybknx.jpg" alt="" />
-              </div>
-              <div class="bb-item-headline-p2">
-                <h1 class="ellipsis">
-                  iFixit tears apart a Magnavox Odyssey 100, doesn't find a disco ball inside
-                </h1>
-                <p class="ellipsis">
-                  The fine people at iFixit have taken the extremely awesome step of tearing down some very retro gear this week, and up first, they've got the Magnavox Odyssey 100 which dates from 1975.
-                </p>
-                <a>Read More</a>
-              </div>
-            </div>
-            <div class="bb-item-content">
-              <div class="bb-item-content-bar">
-                <div class="bb-item-content-bar-back">
-                  <div class="bb-item-content-bar-back-arrow"></div>
-                  <a>
-                    Back
-                  </a>
-                </div>
-              </div>
-              <h1>
-                iFixit tears apart a Magnavox Odyssey 100, doesn't find a disco ball inside
-              </h1>
-              <p>
-                The fine people at iFixit have taken the extremely awesome step of tearing down some very retro gear this week, and up first, they've got the Magnavox Odyssey 100 which dates from 1975. The gaming console, which boasted two (count them ) games -- Tennis and Hockey -- was built around four Texas Instruments chips and powered by six C batteries. It was also the first home gaming console, so we were pretty interested in seeing its insides. What struck us in looking at the photos was the most obvious thing: how much emptier it is than modern gadgets. It was also completely dismantled in just seven steps. Hit the source for more photos and keep your eye out for more vintage disassemblies as the week progresses.
-              </p>
-            </div>
-          </div>
-				</div>
-			</div>
-		</div><!-- /container -->
-		<script src="js/jquery-1.10.2.min.js"></script>
-		<!-- <script src="js/jquerypp.custom.js"></script> -->
-    <script src="js/jquery.touchSwipe.min.js"></script>
-		<script src="js/jquery.bookblock.js"></script>
-		<script>
-			var Page = (function() {
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="css/main.css" rel="stylesheet">
 
-        var $grid = $( '#bb-custom-grid' );
-        
-        return {
-          init : function() {
-            $grid.find('div.bb-bookblock').each( function (i) {
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    
+    <div class="container">
+      
+      <div class="header">
+        <div class="nav">
+        </div>
+      </div>
+      
+      <div class="content">
+        content
+      </div>
+      
+      <div class="footer">
+        footer
+      </div>
+      
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+    <script>
+      var app = {
+        init: function () {
+          app.fn.bindMenu(app.fn.bindMenuToggle);
+        },
+        dom: {
+          create: function (element) {
+            return $(['<',element,'>'].join(''));
+          }
+        },
+        data: {
+          categories: [
+            {
+              name: "Category 1",
+              types: [
+                {
+                  name: "Type 1",
+                  brands: [
+                    {
+                      name: "Brand 1"
+                    },
+                    {
+                      name: "Brand 2"
+                    },
+                    {
+                      name: "Brand 3"
+                    }
+                  ]
+                },
+                {
+                  name: "Type 2",
+                  brands: [
+                    {
+                      name: "Brand 4"
+                    },
+                    {
+                      name: "Brand 5"
+                    }
+                  ]
+                },
+                {
+                  name: "Type 3",
+                  brands: [
+                    {
+                      name: "Brand 6"
+                    }
+                  ]
+                },
+                {
+                  name: "Type 4",
+                  brands: [
+                    {
+                      name: "Brand 7"
+                    },
+                    {
+                      name: "Brand 8"
+                    },
+                    {
+                      name: "Brand 9"
+                    },
+                    {
+                      name: "Brand 10"
+                    }
+                  ]
+                },
+                {
+                  name: "Type 5",
+                  brands: [
+                    {
+                      name: "Brand 11"
+                    },
+                    {
+                      name: "Brand 12"
+                    }
+                  ]
+                }
+              ]// category 1 types
+            },
+            {
+              name: "Category 2",
+              types: [
+                {
+                  name: "Type 6",
+                  brands: [
+                    {
+                      name: "Brand 13"
+                    },
+                    {
+                      name: "Brand 14"
+                    }
+                  ]
+                },
+                {
+                  name: "Type 7",
+                  brands: [
+                    {
+                      name: "Brand 15"
+                    },
+                    {
+                      name: "Brand 16"
+                    },
+                    {
+                      name: "Brand 17"
+                    },
+                    {
+                      name: "Brand 18"
+                    },
+                    {
+                      name: "Brand 19"
+                    }
+                  ]
+                },
+                {
+                  name: "Type 8",
+                  brands: [
+                    {
+                      name: "Brand 20"
+                    }
+                  ]
+                }
+              ]// category 2 types
+            }
+          ]// categories
+        },
+        fn: {
+          bindMenu: function (callback) {
+            var nav = app.dom.create("ul");
+            var categoryName = app.dom.create("a").addClass("category-name");
+            var typeName = app.dom.create("a").addClass("type-name");
+            
+            for (var i = 0, il = app.data.categories.length; i < il; i++) {
               
-              var $bookBlock = $(this),
-                  bb = $bookBlock.bookblock({
-                    orientation: 'horizontal',
-                    speed: 600,
-                    shadowSides: 0.8,
-                    shadowFlip: 0.4
-                  });
-              $bookBlock.find('.bb-item-headline').click(function (ev) {
-                $bookBlock.find('.bb-item-content').addClass('bb-item-content-show');
-                $bookBlock.find('.bb-item-headline').addClass('bb-item-headline-fade');
-                return false;
-              });
-              $bookBlock.find('.bb-item-headline').swipe({
-                swipe: function (event, direction, distance, duration, fingerCount) {
-                  if (direction == 'up')
-                    $bookBlock.bookblock('next');
-                  else if (direction == 'down')
-                    $bookBlock.bookblock('prev');
-                  return false;
+              var category = app.dom.create("li");
+              var types = app.dom.create("ul").addClass('nav-hidden');
+              
+              for (var j = 0, jl = app.data.categories[i].types.length; j < jl; j++) {
+                
+                var type = app.dom.create("li");
+                var brands = app.dom.create("ul");
+                
+                for (var k = 0, kl = app.data.categories[i].types[j].brands.length; k < kl; k++) {
+                  
+                  var brand = app.dom.create("li");
+                  
+                  brands.append(
+                    brand.append(
+                      app.data.categories[i].types[j].brands[k].name
+                    )
+                  );
                 }
-              });
-              $bookBlock.find('.bb-item-content').swipe({
-                swipeRight: function (event, direction, distance, duration, fingerCount) {
-                  if ($bookBlock.find('.bb-item-content-show').length) {
-                    $bookBlock.find('.bb-item-content-show').removeClass('bb-item-content-show');
-                    $bookBlock.find('.bb-item-headline').removeClass('bb-item-headline-fade');
-                  }
-                  return false;
-                }
-              });
-              $bookBlock.find('.bb-item-content-bar-back').click(function () {
-                if ($bookBlock.find('.bb-item-content-show').length) {
-                  $bookBlock.find('.bb-item-content-show').removeClass('bb-item-content-show');
-                  $bookBlock.find('.bb-item-headline').removeClass('bb-item-headline-fade');
-                }
-                return false;
-              });
+                type
+                  .append(typeName.clone().append(app.data.categories[i].types[j].name))
+                  .append(brands);
+                types.append(type);
+              }
+              category
+                .append(categoryName.clone().append(app.data.categories[i].name))
+                .append(types);
+              nav.append(category);
+            }
+            $(".nav").append(nav);
+            
+            'function' == typeof callback && callback();
+          },// bindMenu()
+          bindMenuToggle: function (callback) {
+            console.log('bindMenuToggle');
+            
+            var li = $('.nav > ul > li');
+            li.click(function (ev) {
+              ev.preventDefault();
+              
+              li.children('ul').addClass('nav-hidden');
+              $(this).children('ul').toggleClass('nav-hidden');
+              
+              return false;
             });
-            $grid.focus();
-					}
-        };
-			})();
-		</script>
-		<script>
-				Page.init();
-		</script>
-	</body>
+            
+            $(document).on('mouseup', function (ev) {
+              var li = $('.nav > ul > li');
+              
+              if (!li.is(ev.target) && li.has(ev.target).length === 0) {
+                li.children('ul').addClass('nav-hidden');
+              }
+            });
+            
+            'function' == typeof callback && callback();
+          }
+        }
+      };
+      app.init();
+    </script>
+  </body>
 </html>
+
+
+
+
